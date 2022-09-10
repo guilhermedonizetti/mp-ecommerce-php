@@ -1,7 +1,7 @@
 <?php
 
     include_once("./vendor/autoload.php");
-    MercadoPago\SDK::setAccessToken("APP_USR-1415260560699355-070108-35e2e302ef0581462de721738aa24c1f-655983991");
+    MercadoPago\SDK::setAccessToken("APP_USR-334491433003961-030821-12d7475807d694b645722c1946d5ce5a-725736327");
     MercadoPago\SDK::setIntegratorId("dev_24c65fb163bf11ea96500242ac130004");
     // Cria um objeto de preferência
     $preference = new MercadoPago\Preference();
@@ -12,7 +12,7 @@
     $item->title = $_POST['title'];
     $item->picture_url = 'https://brmotorolanew.vtexassets.com/arquivos/ids/156210/2020_NairobiEU_BasicPack_SurfingBlue_PDP-foto-1.png?v=637455519574800000';
     $item->quantity = $_POST['unit'];
-    $item->unit_price = $_POST['price'];
+    $item->unit_price = 2;
     $item->description = "Celular de Tienda e-commerce";
 
     $preference->payment_methods = array(
@@ -21,20 +21,32 @@
         ),
         "installments" => 6
     );
+
+    $payer = new MercadoPago\Payer();
+    $payer->email = "test_user_92801501@testuser.com";
+    $payer->name = "Lalo";
+    $payer->surname = "Landa";
+    $payer->phone = array(
+        "area_code" => "55",
+        "number" => "98529-8743"
+    );
+    $payer->address = array(
+        "street_name" => "falsa",
+        "street_number" => 123,
+        "zip_code" => "78134-190"
+    );
     
-    /**
-     * PAREI AQUI: revisar como colocar os dois objetos na preferencia.
-     */
-
-
+    
+    $preference->payer = $payer;
     $preference->items = array($item);
     $preference->auto_return = "approved";
     $preference->external_reference = "guilhermedonizetti712@gmail.com";
     $preference->back_urls = array(
-        "success" => "https://www.success.com",
+        "success" => "https://guilherme-mp-commerce-php.herokuapp.com/approved.php",
         "failure" => "https://www.mercadopago.com.br/developers/pt/developer-program/checkout-pro",
-        "pending" => "http://www.pending.com"
+        "pending" => "https://guilherme-mp-commerce-php.herokuapp.com/"
     );
+    $preference->notification_url = "https://maistopestetica.com.br/MercadoPago/mercado_pago/controller/WebhookMercadoPago.php";
     $preference->save();
 
 ?>
@@ -54,7 +66,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="format-detection" content="telephone=no">
 
-    
+
     <!-- JS DO MERCADO PAGO -->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script src="https://www.mercadopago.com/v2/security.js" view="item"></script>
