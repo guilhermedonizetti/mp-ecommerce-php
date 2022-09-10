@@ -46,7 +46,7 @@
         "failure" => "https://www.mercadopago.com.br/developers/pt/developer-program/checkout-pro",
         "pending" => "https://guilherme-mp-commerce-php.herokuapp.com/"
     );
-    $preference->notification_url = "https://maistopestetica.com.br/MercadoPago/mercado_pago/controller/WebhookMercadoPago.php";
+    $preference->notification_url = "https://endpointwebhook.com.br";
     $preference->save();
 
 ?>
