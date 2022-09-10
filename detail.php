@@ -12,7 +12,7 @@
     $item->title = $_POST['title'];
     $item->picture_url = 'https://brmotorolanew.vtexassets.com/arquivos/ids/156210/2020_NairobiEU_BasicPack_SurfingBlue_PDP-foto-1.png?v=637455519574800000';
     $item->quantity = $_POST['unit'];
-    $item->unit_price = 2;
+    $item->unit_price = $_POST['price'];
     $item->description = "Celular de Tienda e-commerce";
 
     $preference->payment_methods = array(
